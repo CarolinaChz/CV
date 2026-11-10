@@ -1,0 +1,126 @@
+<!-- Aquí aparece tu CV de la sesión 1. Si no lo ves, escríbelo primero: sigue los pasos de la sesión 1. -->
+<html lang="es">
+     <head>
+     <meta charset="utf-8">
+     <meta name="viewport" content="width=device-width, initial-scale=1">
+     <meta name="keywords" content="Trabajo">
+     <meta name="description" content="Trabajo">
+     <title>CV de Carolina Chavez</title>
+     <link rel="icon" type="image/svg+xml" href="/publico/img/muestras/profile.svg">
+     
+     <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">     
+
+     <link rel="stylesheet" href="css/styles.css">
+     <script src="js/interactions.js" defer></script>
+    
+     </head>
+
+     <body>
+     <header>
+     <div class="top-bar">
+     <p>Mi CV en HTML</p>
+     <h1>Carolina Chavez</h1>
+     <img src="https://i.pinimg.com/736x/89/5a/2b/895a2b3792cee710e2f5d847722da764.jpg" alt="Carolina Chavez, de frente, sobre fondo claro">
+     <nav>
+     <ul>
+         <li><a href="#about">Perfil</a></li>
+         <li><a href="#experience">Perfil</a></li>
+         <li><a href="#projects">Proyectos</a></li>
+         <li><a href="#education">Perfil</a>
+</li>
+
+       <li><a href="#skills">Perfil</a>
+</li>
+
+     </ul>
+     </nav>
+     </header>
+
+<main>
+   <section class="row" id="about">
+     <h2>Perfil</h2>
+     <div class="col-1-2">
+     <p>Estudio Ingeniería en Sistemas.</p>
+     <a class="primary-btn" href="#projects">Ver mis proyectos</a>
+     <button type="button" id="toggle-details" aria-expanded="false">Más sobre mí</button>
+     </div>
+     <div class="col-1-2">
+     <p>Me describo como una persona responsable. Busco mi primera práctica profesional.</p>
+     </div>
+     </section>
+
+   <section class="row" id="projects">
+     <h2>Proyectos</h2>
+
+     <article class="col-1-3">
+     <img src="/publico/img/muestras/thumb-cv.svg" alt="Miniatura de un currículum en una página web">
+     <h3>Mi CV en HTML</h3>
+     <p>Mi currículum, escrito a mano con etiquetas que dicen qué es cada parte.</p>
+     </article>
+
+     <article class="col-1-3">
+     <img src="/publico/img/muestras/thumb-cv.svg" alt="Miniatura de un currículum en una página web">
+     <h3>Paginas web - Nivel basico</h3>
+     <p>Conocimiento básico en manejo de html y css.</p>
+     </article>
+
+     <article class="col-1-3">
+     <img src="/publico/img/muestras/thumb-cv.svg" alt="Miniatura de un currículum en una página web">
+     <h3>Programación - Nivel básico</h3>
+     <p>Conocimiento básico en C++, C# y Java</p>
+     </article>
+     </section>
+
+   <section class="row" id="experience">
+     <h2>Experiencia</h2>
+     <lu>
+         <li>Soporte técnico - 2026</li>
+         <li>Servicio social - 2026</li>
+     </lu>
+     </section>
+
+   <section class="row" id="education">
+     <h2>Educacion</h2>
+     <ul>
+         <li>Medio</li>
+         <li>medio Superior</li>
+         <li>Superior</li>
+     </ul>
+     </section>
+
+   <section class="row" id="skills">
+     <h2>Habilidades</h2>
+     <ol>
+         <li class="highlight"> Mantenimiento de SO</li>
+         <li>Optimización</li>
+         <li>TI</li>
+     </ol>
+
+     <figure id="skills-gallery">
+     <img id="gallery-image" src="/publico/img/muestras/article-html.svg" alt="HTML: dos corchetes angulares sobre un fondo de color verde">
+     <p id="image-counter" aria-live="polite"></p>
+     <div class="gallery-controls">
+      <button type="button" id="prev-image">Anterior</button>
+      <button type="button" id="next-image">Siguiente</button>
+     </div>
+     </figure>
+     </section>
+
+     <a class="contact-float" href="mailto:chavezsamantha513@gmail.com">Escribeme</a>
+
+</main>
+
+<footer>
+     <p>Contacto: <a href="mailto:chavezsamantha513@gmail.com">chavezsamantha513@gmail.com</a></p>
+     <p>Hecho a mano con HTML y CSS</p>
+</footer>
+
+     <img src="foto.jpg" alt="foto.jpg">
+     <img src="foto.jpg">
+
+     </body>
+
+</html>
+
