@@ -32,7 +32,7 @@ nextButton.addEventListener('click', () => {showImage(current + 1); });
 prevButton.addEventListener('click', () => {showImage(current - 1); });
 
 const aboutSection = document.querySelector('#about');
-const toggleButton = document.querySelector('#toogle-details');
+const toggleButton = document.querySelector('#toggle-details');
 
 const facts = ['Hablo español e inglés', 'Me interesa el tema de Ciberseguridad', 'Estoy disponible desde enero'];
 

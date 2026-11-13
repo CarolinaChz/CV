@@ -12,7 +12,6 @@ Keep this exact layout and keep the references in `index.html` in sync:
 
 ## Known issues (page is incomplete as-is)
 - Most images point to `/publico/img/muestras/*.svg` and `foto.jpg`; those assets are not in the repo.
-- `js/scripts.js` queries `#toogle-details`, but the button is `id="toggle-details"`, so the "Más sobre mí" handler throws and never works.
 - `#experience` uses `<lu>` instead of `<ul>`.
 - Several nav labels say "Perfil" regardless of their target.
 
