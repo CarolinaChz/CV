@@ -38,4 +38,8 @@ Listo. La sección quedó ubicada después de #skills, dentro de <main>:
 También moví el enlace Certificaciones al final del <nav>. La regla #certifications { grid-column: 1 / -1; } ya estaba en css/styles.css y no modifiqué las demás.
 Dejé AAAA-MM como marcador porque no me diste las fechas. Pásamelas (por ejemplo 2026-05) y las reemplazo en los tres <time>.
 
+## Qué cambió
+
+Mejoró y agrego la parte de cursos y certificaciones.
+
 
