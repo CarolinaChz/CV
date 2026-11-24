@@ -22,8 +22,12 @@ header {
   font-size: 0.875rem;
 }
 
-main h2 {
-  font-size: 2.25rem;
+/* Ojo: `main h2` (0,0,2) pierde contra `main > section > h2` (0,0,3) de
+   styles.css, así que el 2.25rem no se aplicaba: el h2 medía el clamp de
+   styles.css (2.65rem = 42.4px). Se sube la especificidad y se deja fluido,
+   con 2.25rem como techo, para que nunca se acerque al h1. */
+main > section > h2 {
+  font-size: clamp(1.85rem, 2.9vw, 2.25rem);
   letter-spacing: -0.01em;
 }
 

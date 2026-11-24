@@ -42,4 +42,25 @@ Dejé AAAA-MM como marcador porque no me diste las fechas. Pásamelas (por ejemp
 
 Mejoró y agrego la parte de cursos y certificaciones.
 
+## Elementos de mi CV
+
+**Modelo:** DeepSeek V4.1 Flash Free
+
+**Prompt:** «En Elementos de mi CV, compara en Calculado el tamaño de `<h1>` con el de un `<h2>`, font-size dice cuánto mide de verdad, después de todas las reglas. La corriges a mano: cambia en css/generated.css, guárdala y recarga el navegador.»
+
+**Medido (pestaña Calculado, ventana de 1280 px):** `h1` = 81.6 px y `h2` = 42.4 px.
+
+Lo raro: `css/generated.css` decía `main h2 { font-size: 2.25rem }` (36 px), pero el `h2` medía 42.4 px, el clamp de `styles.css`. Motivo: `main h2` tiene especificidad (0,0,2) y `main > section > h2` tiene (0,0,3), así que la regla generada nunca ganaba. En pantallas medianas el `h2` se quedaba en 42.4 px mientras el `h1` bajaba a 46.4 px: los dos niveles casi empataban.
+
+**Corrección en `css/generated.css`:**
+
+```css
+main > section > h2 {
+  font-size: clamp(1.85rem, 2.9vw, 2.25rem);
+  letter-spacing: -0.01em;
+}
+```
+
+Ahora el `h2` sí obedece al archivo generado y se queda fluido: 36 px en escritorio, 29.6 px en móvil, siempre por debajo del `h1` (relación 1.57–2.27). Verificado de 390 a 1600 px de ancho y con recarga en el navegador.
+
 
