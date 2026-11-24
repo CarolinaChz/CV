@@ -133,6 +133,45 @@ La falla: el texto **menos importante de la página era el cuarto más grande**,
 
 El eyebrow vuelve a 10.88 px, por debajo del `nav` (11.2 px), del `footer` (12.48 px) y del cuerpo de las tarjetas (14.72 px). No toqué la regla de interlineado (`main p, main li { line-height: 1.6 }`): verificado después del cambio, sigue en 1.6.
 
+## Escala de los encabezados
+
+**Modelo:** DeepSeek V4.1 Flash Free
+
+**Prompt:** «Primero confirma la diferencia entre los tamaños reales y localiza qué regla de css/generated.css participa en el resultado. En DevTools, abre Elementos, selecciona el h1 y luego un h2, y compara font-size en Calculado; revisa también si el tamaño cambia al probar una ventana más angosta. Después busca en css/generated.css las reglas que asignan font-size a esos encabezados y compáralas con la escala que ya está usando la hoja. Solo edita esa parte, guárdala y recarga la página del cv.»
+
+**Confirmado en Calculado:**
+
+| Ventana | `h1` | `h2` | Relación |
+|---|---|---|---|
+| 1280 px | 80.77 px | 36 px | 2.24 |
+| 900 px | 56.45 px | 36 px | 1.57 |
+| 700 px | 46.4 px | 36 px | 1.29 |
+| 620 px | 49.6 px | 29.6 px | 1.68 |
+
+El `h1` sí cambia al angostar la ventana (clamp), el `h2` se quedaba en 36 px de 1280 a 640 px: dejaba de escalar y a 700 px casi empataba con el `h1`.
+
+**Regla de `css/generated.css` que participaba:** `main > section > h2 { font-size: 2.25rem }` más su media query de `1.85rem`. El `h1` no tiene ninguna regla en ese archivo.
+
+**Comparación con la escala de la hoja:** `styles.css` compone el `h2` con `clamp(1.9rem, 3.4vw, 2.65rem)`, es decir mínimo 1.9rem y pendiente 3.4vw. El rediseño había sustituido todo por un valor fijo y rompía esa escalera.
+
+**Corrección en `css/generated.css`** (solo esta parte):
+
+```css
+main > section > h2 {
+  font-size: clamp(1.9rem, 3.4vw, 2.25rem);
+  letter-spacing: -0.01em;
+}
+
+@media (max-width: 620px) {
+  main > section > h2 {
+    font-size: 1.85rem;
+  }
+}
+```
+
+Se conservan el mínimo (1.9rem) y la pendiente (3.4vw) de la hoja y solo baja el techo al paso 2.25rem del rediseño. Resultado: 36 px en escritorio ancho, 33.4 px a 1000 px, 30.4 px por debajo de 880 px, 29.6 px en móvil; relación con el `h1` entre 1.53 y 2.27 (antes 1.29 en el punto más apretado). Interlineado sin cambios: 25.6 / 26.1 / 25.1 / 17.4 px.
+
+
 
 
 

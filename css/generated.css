@@ -25,15 +25,18 @@ header {
   font-size: 0.68rem;
 }
 
-/* Jerarquía de encabezados con dos pasos de la escala que ya usa la hoja:
-   h2 = 2.25rem (36px) en escritorio y 1.85rem (29.6px) en móvil.
-   `main h2` (0,0,2) perdía contra `main > section > h2` (0,0,3) de
-   styles.css, así que el 2.25rem nunca se aplicaba y el h2 medía 42.4px. */
+/* Jerarquía de encabezados con la escala que ya usa styles.css.
+   Su h2 es fluido: clamp(1.9rem, 3.4vw, 2.65rem). Aquí se conservan el
+   mínimo (1.9rem) y la pendiente (3.4vw) y solo se baja el techo al paso
+   2.25rem (36px) del rediseño, para que el h2 no se acerque al h1.
+   (`main h2` (0,0,2) perdía contra `main > section > h2` (0,0,3), así que el
+   2.25rem fijo nunca se aplicaba y el h2 medía 42.4px.) */
 main > section > h2 {
-  font-size: 2.25rem;
+  font-size: clamp(1.9rem, 3.4vw, 2.25rem);
   letter-spacing: -0.01em;
 }
 
+/* En móvil se mantiene el paso 1.85rem (29.6px) de styles.css. */
 @media (max-width: 620px) {
   main > section > h2 {
     font-size: 1.85rem;
