@@ -22,13 +22,19 @@ header {
   font-size: 0.875rem;
 }
 
-/* Ojo: `main h2` (0,0,2) pierde contra `main > section > h2` (0,0,3) de
-   styles.css, así que el 2.25rem no se aplicaba: el h2 medía el clamp de
-   styles.css (2.65rem = 42.4px). Se sube la especificidad y se deja fluido,
-   con 2.25rem como techo, para que nunca se acerque al h1. */
+/* Jerarquía de encabezados con dos pasos de la escala que ya usa la hoja:
+   h2 = 2.25rem (36px) en escritorio y 1.85rem (29.6px) en móvil.
+   `main h2` (0,0,2) perdía contra `main > section > h2` (0,0,3) de
+   styles.css, así que el 2.25rem nunca se aplicaba y el h2 medía 42.4px. */
 main > section > h2 {
-  font-size: clamp(1.85rem, 2.9vw, 2.25rem);
+  font-size: 2.25rem;
   letter-spacing: -0.01em;
+}
+
+@media (max-width: 620px) {
+  main > section > h2 {
+    font-size: 1.85rem;
+  }
 }
 
 .row > h2 {
@@ -36,9 +42,12 @@ main > section > h2 {
   margin-bottom: 64px;
 }
 
+/* El 1.1 es interlineado de titular, no de texto corrido: en párrafos y
+   listas dejaba 17.6px de caja para 16px de letra. Se usa 1.6, el mismo
+   valor con el que la hoja ya compone #projects p y #certifications p. */
 main p,
 main li {
-  line-height: 1.1;
+  line-height: 1.6;
 }
 
 section {

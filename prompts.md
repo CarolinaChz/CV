@@ -52,15 +52,51 @@ Mejoró y agrego la parte de cursos y certificaciones.
 
 Lo raro: `css/generated.css` decía `main h2 { font-size: 2.25rem }` (36 px), pero el `h2` medía 42.4 px, el clamp de `styles.css`. Motivo: `main h2` tiene especificidad (0,0,2) y `main > section > h2` tiene (0,0,3), así que la regla generada nunca ganaba. En pantallas medianas el `h2` se quedaba en 42.4 px mientras el `h1` bajaba a 46.4 px: los dos niveles casi empataban.
 
-**Corrección en `css/generated.css`:**
+**Corrección en `css/generated.css`** (dos pasos de la escala que ya usa la hoja, sin números inventados):
 
 ```css
 main > section > h2 {
-  font-size: clamp(1.85rem, 2.9vw, 2.25rem);
+  font-size: 2.25rem;
   letter-spacing: -0.01em;
+}
+
+@media (max-width: 620px) {
+  main > section > h2 {
+    font-size: 1.85rem;
+  }
 }
 ```
 
-Ahora el `h2` sí obedece al archivo generado y se queda fluido: 36 px en escritorio, 29.6 px en móvil, siempre por debajo del `h1` (relación 1.57–2.27). Verificado de 390 a 1600 px de ancho y con recarga en el navegador.
+Ahora el `h2` sí obedece al archivo generado: 36 px en escritorio y 29.6 px en móvil, siempre por debajo del `h1` (relación 1.29–2.27). Verificado de 390 a 1600 px de ancho y con recarga en el navegador.
+
+## Interlineado de párrafos y listas
+
+**Modelo:** DeepSeek V4.1 Flash Free
+
+**Prompt:** «Seguimos buscando errores pero ahora de interlineado. Puedes revisar en la página del cv en Calculado font-family y line-height de los párrafos y de las listas y también a mano puedes corregir, guardar y recargar como lo hiciste en lo anterior, encuentra la falla en css/generated.css de tipografía y corrígela.»
+
+**Medido (pestaña Calculado, ventana de 1280 px):** la `font-family` estaba bien (Fraunces en titulares, Inter en texto), pero el `line-height` no:
+
+| Elemento | Antes | Relación |
+|---|---|---|
+| `body` | 26.4 px (1.65) | referencia correcta |
+| `#about` p (derecha) | 17.6 px (1.1) | caja más chica que la letra + aire |
+| `#experience lu li` | 17.95 px (1.1) | renglones pegados |
+| `#education li` | 17.25 px (1.1) | renglones pegados |
+| `#skills > ol li` | 11.97 px (1.1) | casi sin aire entre líneas |
+
+La falla: `main p, main li { line-height: 1.1 }` en `css/generated.css`. El 1.1 es interlineado de titular y se estaba aplicando a texto corrido. Con `main p` (0,0,2) ganaba a todo lo que no tuviera un selector más específico, así que solo se salvaban `#projects p` y `#certifications p`, que ya traen 1.6 en `styles.css`.
+
+**Corrección en `css/generated.css`:**
+
+```css
+main p,
+main li {
+  line-height: 1.6;
+}
+```
+
+1.6 es el valor con el que la hoja ya compone `#projects p` y `#certifications p`, así que el texto corrido queda parejo en todas las secciones. Después del cambio: `#about` p derecha 25.6 px, `#experience li` 26.1 px, `#education li` 25.1 px, `#skills li` 17.4 px. Guardado, verificado con captura y recargado en el navegador.
+
 
 
