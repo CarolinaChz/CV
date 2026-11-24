@@ -98,5 +98,41 @@ main li {
 
 1.6 es el valor con el que la hoja ya compone `#projects p` y `#certifications p`, así que el texto corrido queda parejo en todas las secciones. Después del cambio: `#about` p derecha 25.6 px, `#experience li` 26.1 px, `#education li` 25.1 px, `#skills li` 17.4 px. Guardado, verificado con captura y recargado en el navegador.
 
+## Jerarquía del eyebrow del encabezado
+
+**Modelo:** DeepSeek V4.1 Flash Free
+
+**Prompt:** «Sin tocar la parte de interlineado que acabas de hacer, busca la falla de jerarquía en css/generated.css y la vuelves a corregir a mano, guárdala y recarga el navegador y dime qué hiciste.»
+
+**Medido (pestaña Calculado, ventana de 1280 px), de mayor a menor:**
+
+| Texto | Tamaño | Papel |
+|---|---|---|
+| `h1` Carolina Chavez | 80.77 px | titular |
+| `h2` secciones | 36 px | sección |
+| `h3` tarjetas | 20 / 18.88 px | subtítulo |
+| `#about` p lead | 20.19 px | entradilla |
+| `#about` p cuerpo | 16 px | lectura |
+| `#projects` p | 14.72 px | lectura |
+| **`.top-bar` p «MI CV EN HTML»** | **14 px** | etiqueta decorativa |
+| `footer` p | 12.48 px | nota |
+| `nav a` | 11.2 px | navegación |
+| `#certifications` p / chips | 10.88 px | metadato |
+
+La falla: el texto **menos importante de la página era el cuarto más grande**, y encima superaba al `nav` y al `footer`. Venía de `css/generated.css`: `.top-bar p { font-size: 0.875rem }`. Esa regla empata en especificidad (0,1,1) con `.top-bar > p` de `styles.css`, que pedía `0.68rem` (10.88 px), y gana por cargarse después.
+
+**Corrección en `css/generated.css`:**
+
+```css
+.top-bar p {
+  margin: 0;
+  color: #A8A29A;
+  font-size: 0.68rem;
+}
+```
+
+El eyebrow vuelve a 10.88 px, por debajo del `nav` (11.2 px), del `footer` (12.48 px) y del cuerpo de las tarjetas (14.72 px). No toqué la regla de interlineado (`main p, main li { line-height: 1.6 }`): verificado después del cambio, sigue en 1.6.
+
+
 
 

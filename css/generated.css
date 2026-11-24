@@ -16,10 +16,13 @@ header {
   padding: 8px 16px;
 }
 
+/* El eyebrow no es texto de lectura: a 0.875rem (14px) quedaba más grande
+   que el nav (11.2px), que el footer (12.48px) y casi igual que el cuerpo de
+   las tarjetas (14.72px). Vuelve al paso 0.68rem (10.88px) de styles.css. */
 .top-bar p {
   margin: 0;
   color: #A8A29A;
-  font-size: 0.875rem;
+  font-size: 0.68rem;
 }
 
 /* Jerarquía de encabezados con dos pasos de la escala que ya usa la hoja:
